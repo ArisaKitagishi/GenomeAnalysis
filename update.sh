@@ -11,4 +11,7 @@ git add ./
 git commit -m "updated $(date)"
 git push 
 
+# update combined codes folder 
+bash ./codes_combined/update_codes.sh
+
 echo "Done everything!"
