@@ -1,11 +1,11 @@
 for x in $(find $HOME/genomeAnalysis/dna/ -name '*bash*.sh');
 do
-  cp -r $x ./
+  cp -r $x /home/arki7242/github/GenomeAnalysis/codes_combined/
 done
 
 for x in $(find $HOME/genomeAnalysis/rna -name '*bash*.sh');
 do
-  cp -r $x ./
+  cp -r $x /home/arki7242/github/GenomeAnalysis/codes_combined/
 done
 
 git add ./
