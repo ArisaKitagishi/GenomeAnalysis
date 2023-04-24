@@ -15,6 +15,19 @@ module load trimmomatic/0.39
 # paths
 rna_rawdata=/proj/genomeanalysis2023/Genome_Analysis/2_Christel_2017/RNA_raw_data/*
 
+# delete previous folders if they exist  
+for x in $rna_rawdata
+do
+	file=$(basename "$x" .fastq.gz)
+        file="$(cut -d'_' -f1 <<<$file)"
+        echo "File is $file"
+
+        file_path="${SCRDIR}/${file}"
+        if [ -d $file_path ]; then
+                rm -r $file_path
+        fi
+done
+
 for x in $rna_rawdata
 do
 	file=$(basename "$x" .fastq.gz)
@@ -22,9 +35,8 @@ do
 	echo "File is $file"
 
 	file_path="${SCRDIR}/${file}"
-	if [ -d $file_path ]; then
-		rm -r $file_path
-	fi
+	
+	# if we have not made the folder, then create folder and perform trimmomatic
 	if [ ! -d $file_path ]; then
 		mkdir $file_path
 		echo "file path is $file_path"
