@@ -13,9 +13,9 @@ module load bioinfo-tools
 module load eggNOG-mapper/2.1.9
 
 # paths
-dna_assembly=$HOME/genomeAnalysis/dna/assembly/combined/*.contigs.fasta
-echo "path is $dna_assembly"
+dna_prokka=$HOME/genomeAnalysis/dna/annotation/combined/*.gff
+echo "path is $dna_prokka"
 
-emapper.py -m diamond --itype genome --genepred 'prodigal' -i $dna_assembly -o emapper_1 --output_dir $SCRDIR
+emapper.py -m diamond --itype genome --genepred 'prodigal' -i $dna_prokka -o emapper_prokka_gff --output_dir $SCRDIR
 
 echo "done everything!"
