@@ -4,7 +4,7 @@ do
 	# subtract string to get rid of unnecessary directory i.e. home
 	srcdir="${x#$getridof}"
 	echo $srcdir	
-	cp -r $x ./${srcdir}
+	cp -pr $x ./${srcdir}
 done
  
 git add ./
