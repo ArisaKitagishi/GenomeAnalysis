@@ -2,11 +2,12 @@
 #SBATCH -A uppmax2023-2-8
 #SBATCH -M snowy
 #SBATCH -p core
-#SBATCH -n 2
+#SBATCH -n 8
 #SBATCH -t 15:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user arkitagishi@gmail.com
 
 export SCRDIR=$HOME/genomeAnalysis/rna/mapping
-cd $SNIC_TMP
 
 # load modules
 module load bioinfo-tools
@@ -17,6 +18,11 @@ module load samtools
 reference=$HOME/genomeAnalysis/rna/mapping/reference/canu_L_Ferri_combined.contigs.fasta
 trimmed_path=$HOME/genomeAnalysis/rna/preprocessing/ERR*
 
+# copy bwa index to snic_tmp
+cp $reference $SNIC_TMP/
+
+cd $SNIC_TMP
+bwa index $SNIC_TMP/canu_L_Ferri_combined.contigs.fasta
 for x in $trimmed_path
 do
 	file=$(basename "$x")
@@ -27,11 +33,13 @@ do
         paired_2=$(find $x -name "*_paired_2*")
 	echo $paired_1
 	echo $paired_2
-
-	bwa mem $reference $paired_1 $paired_2 | samtools view -S -b | samtools sort - -o "${file}_bwa.bam"
-
-	cp ./* $file_path
-	rm ./*
+	echo "path is $file_path"
+	echo "running bwa mem"
+	bwa mem -t 5 $SNIC_TMP/canu_L_Ferri_combined.contigs.fasta $paired_1 $paired_2 | samtools sort -@ 4 -m 10G -O bam -o $SNIC_TMP/${file}_sorted_bwa.bam 
+	echo "sorted ........................................................................................................"
+	echo ./*_sorted_*.bam
+	cp $SNIC_TMP/${file}_sorted_bwa.bam $file_path
+	
 done
 
 echo "done everything!"
