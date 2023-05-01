@@ -1,6 +1,7 @@
 for x in $(find $HOME/genomeAnalysis/ -name '*bash*.sh');
 do
   cp -r $x /home/arki7242/github/GenomeAnalysis/
+	echo $x
 done
 
 git add ./
