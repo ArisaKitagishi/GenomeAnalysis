@@ -1,6 +1,7 @@
 mkdir codes
 mkdir images
 mkdir html
+mkdir pdf
 
 for x in $(find $HOME/genomeAnalysis/ -name '*bash*.sh');
 do
@@ -15,6 +16,11 @@ done
 for x in $(find $HOME/genomeAnalysis/ -name '*.html');
 do
   cp -r $x ./html
+done
+
+for x in $(find $HOME/genomeAnalysis/ -name '*.pdf');
+do
+  cp -r $x ./pdf
 done
 
 git add ./
