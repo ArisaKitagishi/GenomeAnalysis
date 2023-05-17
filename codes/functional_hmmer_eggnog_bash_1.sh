@@ -18,7 +18,7 @@ dna_prokka=$HOME/genomeAnalysis/dna/annotation/combined/prokka_combined.gff
 echo "path is $dna_prokka"
 
 # check database through $EGGNOG_DATA_ROOT/hmmer
-emapper.py -m hmmer -d Nitrospirae -i $dna_prokka -o emapper_CDS_prokka_gff_Nitrospirae --output_dir $SCRDIR --itype CDS 
+emapper.py -m hmmer -d Nitrospirae -i $dna_prokka -o emapper_prokka_gff_Nitrospirae --output_dir $SCRDIR --itype genome --genepred 'prodigal'
 
 # emapper.py -m diamond --itype genome --genepred 'prodigal' -i $dna_assembly -o emapper_2 --output_dir $SCRDIR
 

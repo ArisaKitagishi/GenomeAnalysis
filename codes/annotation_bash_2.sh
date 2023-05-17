@@ -5,7 +5,7 @@
 #SBATCH -n 2
 #SBATCH -t 5:00:00
 
-export SCRDIR=$HOME/genomeAnalysis/dna/annotation/combined
+export SCRDIR=$HOME/genomeAnalysis/dna/annotation/combined/improved
 cd $SNIC_TMP
 
 # load modules
@@ -15,6 +15,6 @@ module load prokka
 # paths
 dna_assembly=$HOME/genomeAnalysis/dna/assembly/combined/*.contigs.fasta
 
-prokka --outdir $SCRDIR --prefix prokka_combined $dna_assembly
+prokka --outdir $SCRDIR --prefix prokka_combined_improved $dna_assembly --protein ml04_protein.faa.gz
 
 echo "done everything!"
